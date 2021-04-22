@@ -1,0 +1,54 @@
+#!/bin/bash
+#encrypt files with aes-256-cbc cipher using openssl
+##
+##
+##
+#ENCRYPT FILES
+if [ $1 == "-e" ];
+then
+    if [ -f "$2" ];
+    then
+    openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -in "$2" -out "$2.aes"
+    else
+       echo "This file does not exist!" 
+    fi
+##
+##
+##
+#DECRYPT FILES
+elif [ $1 == "-d" ];
+then
+    if [ -f "$2" ];
+    then
+        openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -d -in "$2" -out "$2.decrypt"
+    else
+        echo "This file does not exist!" 
+    fi
+##
+##
+##
+#SHOW HELP
+elif [ $1 == "--help" ];
+then
+    echo "This software uses openssl for encrypting files with the aes--cbc cipher"
+    echo "Usage for Encrypting: ./encrypt -e [file]"
+    echo "Usage for Decrypting: ./encrypt -d [file]"
+else
+    echo "This action does not exist!"
+    echo "Use ./encrypt --help to show help."
+fi
+#
+##
+###
+####	(ONLY TESTED ON KALI LINUX)
+##### 	1-Save as DeEn-Crypt in a location you know the file path-
+##### 	2-Open Bash, Terminal, Terminator, or you favorite CLI, navigate to the directory in which ####	DeEn-Crypt is stored with (cd "/home/lostandfound/") replace "/home/lostandfound/" 
+###	with the folder "DeEn-Crypt" is stored in. 
+##	3-Type "sudo chmod +x DeEn-Crypt"
+#	4-Type "./DeEn-Crypt --help" to display options
+#	5-To Encrypt Example "./DeEn-Crypt -e [File]"
+#	6-Enter Strong Password
+#	7-Verify Password
+#	8-To Decrypt "./DeEn-Crypt -d [File.aes]"
+#	9-Enter in Password to Decrypt
+#	10-Decypted File will be in the same folder as the encrypted file. 
